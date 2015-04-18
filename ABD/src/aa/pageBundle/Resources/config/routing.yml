@@ -1,0 +1,3 @@
+aapage_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: aapageBundle:Page:index }

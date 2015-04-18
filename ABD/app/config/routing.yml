@@ -1,0 +1,22 @@
+_imagine:
+    resource: .
+    type:     imagine
+    
+aapage:
+    resource: "@aapageBundle/Resources/config/routing.yml"
+    prefix:   /
+
+aashop:
+    resource: "@aashopBundle/Resources/config/routing.yml"
+    prefix:   /
+
+aauser:
+    resource: "@aauserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+aaannonce:
+    resource: "@aaannonceBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
