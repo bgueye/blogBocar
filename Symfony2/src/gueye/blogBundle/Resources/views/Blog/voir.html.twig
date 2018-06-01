@@ -1,0 +1,45 @@
+{% extends "gueyeblogBundle::layout.html.twig" %}
+{% block title %}
+  Lecture d'un article - {{ parent() }}
+{% endblock %}
+{% block gueyeblog_body %}
+  {# Ici, on inclut la vue #}
+  {% include "gueyeblogBundle:Blog:article.html.twig" %}
+  {# {% if article.categories.count > 0 %}
+    - Catégories :
+    {% for categorie in article.categories %}
+      {{ categorie.nom }}
+      {% if not loop.last %} - 
+      {% endif %}
+    {% endfor %} 
+  {% endif %} #}
+
+  {% if liste_articleCompetence|length > 0 %}
+    <div>
+      Compétences utilisées dans cet article :
+      <ul>
+        {% for articleCompetence in liste_articleCompetence %}
+          <li>{{ articleCompetence.competence.nom }} : {{ articleCompetence.niveau }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <p>
+    <a href="{{ path('gueyeblog_Accueil') }}" class="btn"><i class="icon-chevron-left"></i>
+    Retour à la liste
+    </a>
+    <a href="{{ path('gueyeblog_modifier', {'slug': article.slug}) }}" class="btn"><i class="icon-edit"></i>
+    Modifier l'article
+    </a>
+    <a href="{{ path('gueyeblog_supprimer', {'slug': article.slug}) }}" class="btn btn-danger"><i class="icon-trash"></i>
+    Supprimer l'article
+    </a>
+  </p>
+  <div class="well"> 
+    {% for commentaire in article.commentaires %}
+    <strong>{{ commentaire.auteur }}, le {{ commentaire.date|date('d/m/Y') }}</strong>
+    <p>{{ commentaire.contenu }}</p>
+    <hr>
+    {% endfor %}
+  </div>
+{% endblock %}

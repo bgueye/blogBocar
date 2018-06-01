@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>{% block title %}Blog de Bocar{% endblock %}</title>
+		{% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" type="text/css" />
+		{% endblock %}
+	</head>
+	<body>
+		<div class="container">
+			<div id="header" class="hero-unit text-center">
+				<h1>Mon Premier Blog WEB</h1>
+				<p>Ce projet est propulsé par Symfony2.</p>
+				<p>
+					<a class="btn btn-primary btn-large"
+						href="http://www.siteduzero.com/informatique/tutoriels/developpez-votresite-web-avec-le-framework-symfony2">
+						Lire le tutoriel »
+					</a>
+					<a class="btn btn-primary btn-large"
+						href="http://www.siteduzero.com/informatique/tutoriels/developpez-votresite-web-avec-le-framework-symfony2">
+						autres tutoriels »
+					</a>
+					{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+						Bienvenue  {{ app.user.username }} 
+						<a class="btn btn-primary btn-large"
+							href="{{path('fos_user_security_logout') }}">
+							Déconnexion
+						</a>
+					{% else %}
+						<a class="btn btn-primary btn-large"
+							href="{{ path('fos_user_security_login') }}">
+							Connexion
+						</a>
+					{% endif %}
+				</p>
+			</div>
+			<div class="row">
+				<div id="menu" class="span3">
+					<h3>Le blog de Bocar</h3>
+					<ul class="nav nav-pills nav-stacked">
+						<li><a href="{{ path('gueyeblog_Accueil') }}">Accueil du blog</a></li>
+						{# On n'affiche le lien « Ajouter un article » qu'aux auteurs
+						(et admins, qui héritent du rôle auteur) #}
+						{% if is_granted('ROLE_AUTEUR') %}
+						<li><a href="{{ path('gueyeblog_ajouter') }}">Nouvel article</a></li>
+						{% endif %}
+					</ul>
+					<hr>
+					{{ render(controller("gueyeblogBundle:Blog:menu", {'nombre': 3})) }}
+					<hr>
+				</div>
+				<div id="content" class="span9">
+					{% block body %}
+					{% endblock %}
+				</div>
+			</div>
+			<hr>
+			<footer class="text-center">
+				<p>© {{webmaster}} 2014.</p>
+			</footer>
+		</div>
+		{% block javascripts %}
+			{# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+			<script
+			src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+			<script type="text/javascript" src="{{ asset('js/bootstrap.js')	}}"></script>
+		{% endblock %}
+	</body>
+</html>

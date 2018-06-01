@@ -1,0 +1,36 @@
+#parameters:
+#    gueyeblog.example.class: gueye\blogBundle\Example
+
+#services:
+#    gueyeblog.example:
+#        class: %gueyeblog.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+#    gueye_blog.antispam:
+#        class: gueye\BlogBundle\Antispam\gueyeAntispam
+
+
+services:
+    gueyeblog.validator.antiflood: # Le nom du service
+        class: gueye\blogBundle\Validator\AntiFloodValidator # La classe du service, ici notre validateur déjà créé
+        arguments: [@request, @doctrine.orm.entity_manager] # Les données qu'on injecte au service la requête et l'EntityManager
+        scope: request # Comme on injecte la requête, on doit préciser ce scope
+        tags:- { name: validator.constraint_validator, alias:gueyeblog_antiflood } # C'est avec l'alias qu'on retrouvera le service
+
+    gueye_blog.antispam:
+        class: gueye\blogBundle\AntiSpam\gueyeAntispam
+        arguments: [@mailer, 3]
+        calls:
+            - [ setLocale, [ %locale% ] ]
+        tags:
+            - { name: twig.extension }
+
+    gueye_blog.ckeditor:
+        class: gueye\blogBundle\Form\Type\CkeditorType
+        tags:
+            - { name: form.type, alias: ckeditor }
+
+    gueyeblog.beta_listener:
+        class: gueye\blogBundle\Beta\BetaListener
+        arguments: ["2014-09-19"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }

@@ -1,0 +1,7 @@
+parameters:
+#    gueye_user.example.class: gueye\UserBundle\Example
+
+services:
+#    gueye_user.example:
+#        class: %gueye_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

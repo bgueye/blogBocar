@@ -1,0 +1,29 @@
+
+gueyeblog_Accueil:
+    pattern: /{page}
+    defaults: { _controller: gueyeblogBundle:blog:index, page: 1 }
+    requirements:
+        page: \d*
+
+gueyeblog_voir:
+    pattern: /article/{slug}.{_format}
+    defaults: { _controller: gueyeblogBundle:blog:voir, _format: html }
+    requirements:
+        _format: html|xml
+
+gueyeblog_ajouter:
+    pattern: /ajouter
+    defaults: { _controller: gueyeblogBundle:blog:ajouter }
+
+gueyeblog_modifier:
+    pattern: /modifier/{slug}.{_format}
+    defaults: { _controller: gueyeblogBundle:blog:modifier, _format: html }
+    requirements:
+        _format: html|xml
+
+gueyeblog_supprimer:
+    pattern: /supprimer/{slug}.{_format}
+    defaults: { _controller: gueyeblogBundle:blog:supprimer, _format: html }
+    requirements:
+        _format: html|xml
+

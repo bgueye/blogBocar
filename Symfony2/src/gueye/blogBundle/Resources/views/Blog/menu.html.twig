@@ -1,0 +1,10 @@
+{# Ce template n'hérite de personne, tout comme le template inclus avec {% include %}. #}
+<p>Les Derniers Articles</p>
+<ul>
+	<ul class="nav nav-pills nav-stacked">
+
+		{% for article in liste_articles %}
+		<li><a href="{{ path('gueyeblog_voir', {'slug': article.slug}) }}">{{ article.titre }}</a></li>
+		{% endfor %}
+	</ul>
+</ul>

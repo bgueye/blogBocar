@@ -1,0 +1,16 @@
+{% extends "gueyeblogBundle::layout.html.twig" %}
+{% block title %}
+	Ajouter un article - {{ parent() }}
+{% endblock %}
+{% block gueyeblog_body %}
+	<h2>Ajouter un article</h2>
+	{% include "gueyeblogBundle:Blog:formulaire.html.twig" %}
+	<p>
+		Vous etes en train d'ajouter un nouvel article dans le bloc. il sera affiché apres validation dans la page d'accueil du site.
+	</p>
+	<p>
+		<a href="{{ path('gueyeblog_Accueil') }}" class="btn"><i class="icon-chevron-left"></i>
+	  Retour Accueil
+		</a>
+	</p>
+{% endblock %}
